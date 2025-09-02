@@ -5,12 +5,16 @@ import java.util.ArrayList;
 
 public class Main {
 
+
     public static void main(String[] args) {
+        double totalImoveis = 0;
+        double totalFinanciado = 0;
+
         InterfaceUsuario ui = new InterfaceUsuario();
         Financiamento fnc = new Financiamento(1, 1, 1);
         ArrayList<String> listaFinanciamentos = new ArrayList<>();
 
-        System.out.println("Sistema de Financiamento bancario!");
+        System.out.println("Sistema de Financiamento bancário!");
 
         // Solicitar taxa de juros
         fnc.taxaJurosAnual = ui.pedirTaxaJurosAnual();
@@ -22,10 +26,14 @@ public class Main {
             // Solicitar prazo de financiamento
             fnc.prazoFinanciamento = ui.pedirPrazoFinanciamento(i);
             listaFinanciamentos.add("Financiamento "+ i + " - valor do imóvel: R$ " + String.format("%.2f", fnc.valorImovel) + ", valor do financiamento: R$ " + String.format("%.2f", fnc.calcularTotalPagamento()) + "." );
+            totalImoveis += fnc.valorImovel;
+            totalFinanciado += fnc.calcularTotalPagamento();
         }
+
         for (int i = 0; i < 4; i++) {
             System.out.println(listaFinanciamentos.get(i));
         }
+        System.out.println("Valor total dos imóveis: R$ " + String.format("%.2f", totalImoveis) + ", valor total do financiamento: R$ " + String.format("%.2f", totalFinanciado) + "." );
 
         System.out.println("Taxa de juros anual de: " + String.format("%.2f",fnc.taxaJurosAnual) + "%");
 
